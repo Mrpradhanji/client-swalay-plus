@@ -453,3 +453,20 @@
 // }
 
 // export default page
+
+
+
+
+
+import React from 'react';
+
+const LabelPage: React.FC = () => {
+  return (
+    <div>
+      <h1>Label Details</h1>
+      {/* Render label details here */}
+    </div>
+  );
+};
+
+export default LabelPage;
