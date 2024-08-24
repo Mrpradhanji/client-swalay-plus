@@ -96,7 +96,7 @@ const ArtistModalForm = ({ isVisible, onClose }: { isVisible: boolean; onClose: 
         onClose();
 
         setTimeout(() => {
-            toast.success("😉 New artist add Hogya")
+            toast.success("New artist added successfully")
         }, 500);
 
     };
@@ -179,53 +179,7 @@ const ArtistModalForm = ({ isVisible, onClose }: { isVisible: boolean; onClose: 
 
                 <div>
                     <label className="form-label" htmlFor="isIPRSMember">IPRS Member?</label>
-                    {/* <ul className="flex items-center">
-            <li className="w-1/2">
-              <div className="flex items-center ps-3">
-                <input
-                  id="horizontal-list-radio-license"
-                  type="radio"
-                  value="true"
-                  name="isIPRSMember"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 cursor-pointer"
-                  checked={formData.isIPRSMember === true}
-                  onChange={(e) => setFormData(prevFormData => ({
-                    ...prevFormData,
-                    isIPRSMember: e.target.value === "true"
-                  }))}
-                />
-                <label
-                  htmlFor="horizontal-list-radio-license"
-                  className="cursor-pointer w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Yes
-                </label>
-              </div>
-            </li>
-
-            <li className="w-1/2">
-              <div className="flex items-center ps-3">
-                <input
-                  id="horizontal-list-radio-id"
-                  type="radio"
-                  value="false"
-                  name="isIPRSMember"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 cursor-pointer"
-                  checked={formData.isIPRSMember === false}
-                  onChange={(e) =>  setFormData(prevFormData => ({
-                    ...prevFormData,
-                    isIPRSMember: e.target.value === "false"
-                  }))}
-                />
-                <label
-                  htmlFor="horizontal-list-radio-id"
-                  className="cursor-pointer w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  No
-                </label>
-              </div>
-            </li>
-          </ul> */}
+                  
 
                     <ul className="flex items-center">
                         <li className="w-1/2">
@@ -274,24 +228,28 @@ const ArtistModalForm = ({ isVisible, onClose }: { isVisible: boolean; onClose: 
                             </div>
                         </li>
                     </ul>
-
-
-
                 </div>
 
-                <div>
-                    <label className="form-label" htmlFor="iprsNumber">IPRS Number</label>
-                    <input
-                        type="text"
-                        id="iprsNumber"
-                        name="iprsNumber"
-                        disabled={formData.isIPRSMember ? false : true}
-                        value={formData.iprsNumber}
-                        onChange={(e) => setFormData({ ...formData, iprsNumber: e.target.value })}
-                        className={`form-control ${formData.isIPRSMember ? '' : 'form-disabled'} `}
-                        placeholder="Write IPRS Number"
-                    />
-                </div>
+         <div>
+             <label className="form-label" htmlFor="iprsNumber">IPRS Number</label>
+             <input
+              type="text"  // Change to "text" to enforce maxLength
+              id="iprsNumber"
+              name="iprsNumber"
+              disabled={!formData.isIPRSMember}
+               value={formData.iprsNumber}
+                onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d{0,12}$/.test(value)) {
+                setFormData({ ...formData, iprsNumber: value });
+                     }
+                    }}
+                className={`form-control ${formData.isIPRSMember ? '' : 'form-disabled'} `}
+                placeholder="Enter 12-digit IPRS Number"
+                maxLength={12}  // Enforces a maximum of 12 digits
+                           />
+         </div>
+
             </div>
 
             <label className="mb-0" htmlFor="artistType">Artist Type</label>

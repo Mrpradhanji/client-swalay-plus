@@ -29,18 +29,13 @@ const ArtistPage = ({ params }: { params: { id: string } }) => {
       setIsLoading(false)
 
     } catch (error) {
-      toast.error("🤔 Kuch galti hogaya")
+      toast.error("error!")
       setIsLoading(false)
     }
 
   }
 
-  // useEffect(() => {
-  //   if (artistId) {
-  //     setDecodedArtistId(atob(artistId as string));
-  //   }
-  // }, [artistId]);
-
+  
   useEffect(() => {
     fethcArtisDetails()
   }, []);

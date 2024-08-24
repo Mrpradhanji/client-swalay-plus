@@ -1,4 +1,5 @@
 'use client'
+
 import Image from "next/image"
 import Style from "../../styles/Profile.module.css"
 import toast from "react-hot-toast"
@@ -29,7 +30,10 @@ const page = () => {
   
   const labelId = context?.user?._id;
   const username = context?.user?.username;
-  // const lableName = context?.user?.lable;
+  const email = context?.user?.email;
+  const contact = context?.user?.contact;
+  //const joinedat = context?.user?.joinedAT;
+   const lableName = context?.user?.lable;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [bankData, setBankData] = useState<BankData | null>(null);
@@ -69,8 +73,6 @@ const page = () => {
   }, [labelId])
 
 
-
-
   return (
     // <div className="flex" >
     <div className="grid grid-cols-12 gap-4 ">
@@ -78,11 +80,11 @@ const page = () => {
       <div className={`col-span-3 h-screen  ${Style.profileSidebar}`}>
 
         <div className={`my-4 ${Style.profileImgContainer}`}>
-          <Image src={"/images/album3.jpg"} width={250} height={250} alt="profile" className={Style.profileImage} />
+          <Image src={""} width={250} height={250} alt="profile" className={Style.profileImage} />
         </div>
         <div className="mt-5 mb-5">
-          <p className={Style.labelName} >Label  name</p>
-          <p className={Style.labelUserName} >Label user name</p>
+          <p className={Style.labelName} >{username}</p>
+          <p className={Style.labelUserName} >{email}</p>
           <p className={`mt-3 ${Style.labelDescription}`} >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere vitae recusandae dolores excepturi, rerum ullam sequi officiis non sit magni fugit animi quo officia quae aliquam. Possimus nam architecto deserunt.</p>
         </div>
 
@@ -100,14 +102,13 @@ const page = () => {
         <div className={Style.profileContainer}>
           <div className="flex items-center justify-between">
             <h3 className={Style.labelHeader}>Label Information</h3>
-            <i className={`bi bi-pencil-square ${Style.editIcon}`}></i>
           </div>
 
           <div className="grid grid-cols-12 gap-4 mt-3 mb-3">
 
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Label Name</p>
-              <p>Sarkar World Music Ltd</p>
+              <p>{lableName}</p>
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Label Owner Name</p>
@@ -115,15 +116,15 @@ const page = () => {
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Joining Date</p>
-              <p>10th March, 2024</p>
+              <p>10 march</p>
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Email</p>
-              <p>s@gmail.com</p>
+              <p>{email}</p>
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Contact</p>
-              <p>789654123</p>
+              <p>{contact}</p>
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Address</p>
@@ -131,16 +132,16 @@ const page = () => {
             </div>
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Total Album</p>
-              <p>888k</p>
+              <p>0</p>
             </div>
             <div className={`col-span-4 `}>
               <p className={Style.labelSubHeader}>Total Track</p>
-              <p>888k</p>
+              <p>0</p>
             </div>
 
             <div className={`mb-3 col-span-4 `}>
               <p className={Style.labelSubHeader}>Total Earning</p>
-              <p>88888888k</p>
+              <p>0</p>
             </div>
 
 

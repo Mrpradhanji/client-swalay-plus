@@ -3,7 +3,11 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 interface User {
   _id: string;
+  lable:  string;
   username: string;
+  email: string;
+  contact: number;
+  joinedAT: Date;
   // Add other user properties here
 }
 

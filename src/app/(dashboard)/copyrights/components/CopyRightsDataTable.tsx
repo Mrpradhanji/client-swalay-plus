@@ -45,10 +45,7 @@ export type Copyright = {
     _id: string;
     labelId: string;
     trackId: string;
-    // trackname: string;
-    // albumname: string;
-    // comments: string;
-    // artistName: string;
+    
     link: string;
     status: boolean
 
@@ -61,7 +58,7 @@ export const copyrightsColumns: ColumnDef<Copyright>[] = [
         cell: ({ row }) => {
             const copyrightsData = row.original;
             return <Link className="ms-2 text-blue-600" href={`/albums/${btoa(copyrightsData.labelId)}`}>
-                {copyrightsData.trackId ? copyrightsData.trackId : "No trackid"}
+                {copyrightsData.trackId ? copyrightsData.trackId : "No track id"}
             </Link>;
         },
 
@@ -80,8 +77,8 @@ export const copyrightsColumns: ColumnDef<Copyright>[] = [
 
     },
     {
-        accessorKey: "staus",
-        header: "Staus",
+        accessorKey: "status",
+        header: "Status",
 
         cell: ({ row }) => {
             const copyrightsData = row.original;

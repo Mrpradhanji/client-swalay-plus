@@ -39,13 +39,11 @@ const copyrights = () => {
         setCopyrights(response.data)
       }
 
-      // console.log("copyrights response");
-      // console.log(response);
-      // console.log(response.data);
+    
 
       setIsLoading(false)
     } catch (error) {
-      toast.error("🤔 Kuch galti hogaya")
+      toast.error("failed")
       setIsLoading(false)
     }
 

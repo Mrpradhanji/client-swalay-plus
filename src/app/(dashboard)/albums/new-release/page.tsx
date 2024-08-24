@@ -39,10 +39,10 @@ type TagOption = {
 const AlbumForm: React.FC = () => {
   const context = useContext(UserContext);
   const labelId = context?.user?._id ?? "";
+  const username = context?.user?.username || '';
 
   const year = new Date().getFullYear();
-  const labelLine = year + " SL Web Team";
-
+  const   labelLine =  `${year} ${username}`;
   const router = useRouter();
 
   // useState hook to manage the form data
@@ -54,8 +54,8 @@ const AlbumForm: React.FC = () => {
     label: "SwaLay Digital",
     language: "",
     artwork: null,
-    pLine: labelLine,
-    cLine: labelLine,
+    pLine: labelLine ,
+    cLine: labelLine ,
   });
 
   const albumTags = [
@@ -310,19 +310,7 @@ const AlbumForm: React.FC = () => {
               </div>
             </div>
 
-            {/* <div>
-              <label className="block text-sm font-medium text-gray-700">Record Label</label>
-              <select
-                name="label"
-                value={formData.label}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              >
-                <option value="">Select Your Label</option>
-                <option value="SwaLay">SwaLay</option>
-              </select>
-              {errors.label && <p className="text-red-500 text-sm mt-1">{errors.label[0]}</p>}
-            </div> */}
+           
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
@@ -450,7 +438,7 @@ const AlbumForm: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Album Cover (File Type: png, jpg | File Size: 300 x 300)
+                Album Cover (File Type: png, jpg | File Size: 3000 x 3000)
               </label>
               <div
                 {...getRootProps()}

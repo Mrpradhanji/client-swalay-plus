@@ -34,7 +34,7 @@ function ArtistForm() {
       }
       setIsLoading(false)
     } catch (error) {
-      toast.error("🤔 Kuch galti hogaya")
+      toast.error("error !")
       setIsLoading(false)
     }
 

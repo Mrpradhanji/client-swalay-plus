@@ -23,25 +23,7 @@ const Page = ({ params }: { params: { trackid: string } }) => {
 
   const searchParams = useSearchParams();
 
-  // useEffect(() => {
-  //   // Decode the trackId
-  //   try {
-  //     const decodedTrackID = atob(trackIdParams);
-  //     setTrackId(decodedTrackID);
-  //   } catch (e) {
-  //     setError("Invalid Url");
-  //     console.error("Decoding error:", e);
-  //   }
-  //   // Extract trackname and trackurl from the query parameters
-  //   const tracknameParam = searchParams.get("trackname");
-  //   const trackurlParam = searchParams.get("trackurl");
-  //   if (tracknameParam) {
-  //     setTrackName(tracknameParam);
-  //   }
-  //   if (trackurlParam) {
-  //     setTrackUrl(trackurlParam);
-  //   }
-  // }, [trackIdParams, searchParams]);
+
 
 
 

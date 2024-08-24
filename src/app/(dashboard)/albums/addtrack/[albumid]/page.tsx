@@ -16,6 +16,7 @@ import { MultiSelect } from "react-multi-select-component";
 import { useRouter } from "next/navigation";
 import Uploading from "@/components/Uploading";
 import ArtistModalForm from "@/components/ArtistModalForm";
+import CallerTune from "./callertune/callertune";
 
 interface Person {
   name: string;
@@ -325,24 +326,11 @@ export default function NewTrack({ params }: { params: { albumid: string } }) {
                     </div>
                   </div>
                   <div className="col-span-6 space-y-6">
+
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700">
-                        Caller Tune Time (HH:MM:SS)
-                      </label>
-                      <input
-                        name="crbt"
-                        type="text"
-                        placeholder="00:00:00"
-                        value={callerTuneTime}
-                        onChange={(e) => setCallerTuneTime(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                      {errors.callerTuneTime && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.callerTuneTime._errors[0]}
-                        </p>
-                      )}
+                      <CallerTune/>
                     </div>
+                    
                   </div>
                 </div>
 

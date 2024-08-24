@@ -45,7 +45,7 @@ const HomeStatsCard = () => {
     <div className={Style.statsContainer}>
       <div className={Style.greetContainer}>
         <h1 className={Style.heading}>Welcome, {userName}</h1>
-        <p className={Style.para}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+        <p className={Style.para}></p>
       </div>
 
       {/* <div className={Style.statusCardContainer}>

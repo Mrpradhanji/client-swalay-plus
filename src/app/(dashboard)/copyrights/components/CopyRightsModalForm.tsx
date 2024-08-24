@@ -74,24 +74,35 @@ const CopyRightsModalForm = ({ isVisible, onClose }: { isVisible: boolean; onClo
           onChange={(e) => setFormData({ ...formData, trackId: e.target.value })}
         >
           <option value="">Select Track</option>
-          <option value="Songiid">Songname</option>
+          <option value="Songid">Songname</option>
         </select>
 
 
       </div>
 
-      <div>
-        <label className="form-label" htmlFor="trackname">Youtube url</label>
-        <input
-          id="inline-checkbox-singer"
-          type="text"
-          name="singer"
-          placeholder='Paste your youtbe url here'
-          value={formData.youtubeUrl}
-          onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
-          className="form-control"
-        />
-      </div>
+       <div>
+            <label className="form-label" htmlFor="youtubeUrl">YouTube URL</label>
+            <input
+              id="youtubeUrl"
+              type="text"
+              name="youtubeUrl"
+              placeholder="Paste your YouTube URL here"
+              value={formData.youtubeUrl}
+              onChange={(e) => setFormData({ ...formData, youtubeUrl: e.target.value })}
+              onBlur={(e) => {
+                const value = e.target.value;
+                const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+                
+                if (!youtubeRegex.test(value) && value !== "") {
+                  alert("Please enter a valid YouTube URL");
+                  // Optionally reset the input if invalid
+                  setFormData({ ...formData, youtubeUrl: "" });
+                }
+              }}
+              className="form-control"
+            />
+        </div>
+
 
 
     </Modal>

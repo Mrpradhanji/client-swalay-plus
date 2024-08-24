@@ -1,10 +1,8 @@
-'use client'
+"use client";
+
+import React, { useContext, useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-// import { label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input";
-// import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button";
-import { useContext, useEffect, useState } from "react";
 import UserContext from "@/context/userContext";
 import { apiPost } from "@/helpers/axiosRequest";
 import toast from "react-hot-toast";
@@ -14,30 +12,32 @@ interface FormData {
   email: string;
   subject: string;
   message: string;
-  labelId?: string; 
+  labelId?: string;
 }
 
 export default function Component() {
-
   const context = useContext(UserContext);
-  const labelId = context?.user?._id;
-
-
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     subject: "",
     message: "",
-    labelId: ""
+    labelId: "",
   });
 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setFormData({ ...formData, labelId });
-  }, [labelId])
-  
-
+    if (context?.user) {
+      setFormData({
+        name: context.user.username || "",
+        email: context.user.email || "",
+        subject: "",
+        message: "",
+        labelId: context.user._id || "",
+      });
+    }
+  }, [context]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,35 +52,28 @@ export default function Component() {
     e.preventDefault();
     setError(null);
 
-    // Basic validation
-    if ( !formData.name || !formData.email || !formData.subject || !formData.message ) {
+    if (!formData.subject || !formData.message) {
       setError("All fields are required.");
       return;
     }
 
-    
     try {
+      const response = await apiPost("/api/support/addSupport", formData);
 
-      const response = await apiPost('/api/support/addSupport', formData)
-      
       if (response.success) {
-        toast.success("Thank You! We will be in touch with you shortly.")
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setFormData({ ...formData, labelId });
-
+        toast.success("Thank You! We will be in touch with you shortly.");
+        setFormData({ ...formData, subject: "", message: "" });
       } else {
-        toast.error(response.message)
+        toast.error(response.message);
         setError("Failed to send the message. Please try again.");
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
     }
-
-
   };
 
   return (
-    <div className="w-full min-h-[80dvh] p-6 bg-white rounded-sm ">
+    <div className="w-full min-h-[80dvh] p-6 bg-white rounded-sm">
       <div className="space-y-4 mb-8">
         <h1 className="text-3xl font-bold">Support Desk</h1>
         <p className="text-muted-foreground">
@@ -101,23 +94,24 @@ export default function Component() {
                   <input
                     id="name"
                     type="text"
-                    placeholder="Enter your name"
                     value={formData.name}
                     onChange={handleChange}
                     className="form-control"
-                    required={true}
+                    required
+                    readOnly
                   />
                 </div>
+
                 <div className="space-y-2">
                   <label htmlFor="email">Email</label>
                   <input
                     id="email"
                     type="email"
-                    placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
                     className="form-control"
-                    required={true}
+                    required
+                    readOnly
                   />
                 </div>
               </div>
@@ -130,7 +124,7 @@ export default function Component() {
                   value={formData.subject}
                   onChange={handleChange}
                   className="form-control"
-                  required={true}
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -141,7 +135,7 @@ export default function Component() {
                   value={formData.message}
                   onChange={handleChange}
                   className="min-h-[150px] form-control"
-                  required={true}
+                  required
                 />
               </div>
               {error && <p className="text-red-500">{error}</p>}
@@ -159,33 +153,27 @@ export default function Component() {
             <div>
               <h3 className="font-semibold">Address</h3>
               <p>
-                123 Main St.
+                TC HO, C-4, 4/19, Sector-2
                 <br />
-                Anytown, CA 12345
+                Rajender Nagar, Sahibabad, Ghazibabad, UP-201005
               </p>
             </div>
             <div>
               <h3 className="font-semibold">Phone</h3>
               <p>
-                <a href="#">+1 (888) 888-8888</a>
+                <a>011 69268163 / +91 7303630201</a>
               </p>
             </div>
             <div>
               <h3 className="font-semibold">Email</h3>
               <p>
-                <a href="#">support@example.com</a>
+                <a href="mailto:swalay.care@talantoncore.in">swalay.care@talantoncore.in</a>
               </p>
             </div>
             <div>
               <h3 className="font-semibold">WhatsApp</h3>
               <p>
-                <a href="#">support@example.com</a>
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">Socials</h3>
-              <p>
-                <a href="#">support@example.com</a>
+                <a href="#">+91 7303630201</a>
               </p>
             </div>
           </CardContent>
