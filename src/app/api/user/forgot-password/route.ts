@@ -1,11 +1,12 @@
-// pages/api/user/forgot-password.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { connect } from '@/dbConfig/dbConfig';
-import Label from '@/models/Label';
-import jwt from 'jsonwebtoken';
-import { Resend } from 'resend';
-import { EmailTemplate } from '@/components/Email/Welcome';
-// Initialize Resend API
+import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+import { connect } from "@/dbConfig/dbConfig";
+import Label from "@/models/Label";
+import { Resend } from "resend";
+import { PasswordResetTemplate } from "@/components/Email/PasswordReset";
+import React from 'react';
+
+// Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
@@ -14,14 +15,7 @@ export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
 
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      return NextResponse.json({
-        status: 400,
-        success: false,
-        error: 'Invalid email format'
-      });
-    }
-
+    // Check if the email exists
     const user = await Label.findOne({ email });
     if (!user) {
       return NextResponse.json({
@@ -31,36 +25,40 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Generate a password reset token
-    const resetToken = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET!, { expiresIn: '1h' });
+    // Generate a reset token
+    const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET!, { expiresIn: "1h" });
 
-    // Create reset link
-    const resetLink = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
+    // Create the reset link
+    const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`;
 
-    // Send reset email
+    // Generate the email content using the React component
+    const emailContent = React.createElement(PasswordResetTemplate, { firstName: user.username, resetLink });
+
+    // Send the email
     const { error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: "itadmin@talantoncore.in",
-      subject: 'Password Reset Request',
-      react: EmailTemplate({ resetLink })
+      from: "SwaLay <support@swalay.in>",
+      to: user.email,
+      subject: "Password Reset Request",
+      react: emailContent
     });
 
     if (error) {
-      console.error('Error sending email:', error);
+      console.error("Email sending error:", error);
       return NextResponse.json({
         status: 500,
         success: false,
-        error: 'Failed to send reset email'
+        error: "Failed to send password reset email"
       });
     }
 
     return NextResponse.json({
-      status: 200,
       success: true,
-      message: 'Reset link sent successfully'
+      status: 200,
+      message: "Password reset email sent"
     });
-  } catch (error: any) {
-    console.error('Error:', error);
+
+  } catch (error) {
+    console.log(error);
     return NextResponse.json({
       status: 500,
       success: false,
