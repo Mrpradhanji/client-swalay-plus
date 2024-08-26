@@ -5,9 +5,10 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { apiPost } from '@/helpers/axiosRequest'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 
 
-const signIn = () => {
+const SignIn = () => {
 
   const router = useRouter()
   const [user, setUser] = useState({
@@ -99,12 +100,22 @@ const signIn = () => {
                 />
               </div>
 
+             
               <div className={`${Styles.formGroup} ${Styles.formbutton} `}>
                 <button className={Styles.submitButton} onClick={onSignIn} >Sign In</button>
               </div>
+
+              <div>
+                <p className={Styles.forgotPassword}>
+                  <Link href= "/forgotpassword">Forgot Password?</Link>
+                  </p>
+              </div>
+
               <p className={`${Styles.inputLable} ${Styles.labelagreeterm}`}  >
-                Don't have an account?  <Link href="/register" className={Styles.termservice}>Register</Link></p>
+              
+                Do not have an account?  <Link href="/register" className={Styles.termservice}>Register</Link></p>
             </div>
+            
 
           </div>
 
@@ -124,4 +135,4 @@ const signIn = () => {
 
 }
 
-export default signIn
+export default SignIn
