@@ -1,4 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
 "use client";
+
+import React from "react";
 import {
   Card,
   CardHeader,
