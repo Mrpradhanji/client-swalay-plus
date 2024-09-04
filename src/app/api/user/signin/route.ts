@@ -59,11 +59,12 @@ export async function POST(request: NextRequest) {
         // Send the welcome email to your own address for testing
         // eslint-disable-next-line no-unused-vars
         const { data, error } = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>', //testing default email id
-            to: 'itadmin@talantoncore.in', // Use your own email address for testing
+            from: 'SwaLay <onboarding@swalay.in>', // Correct format with a valid email address
+            to: email, // Use the user's email address
             subject: 'Welcome to SwaLay!',
             react: EmailTemplate({ firstName: user.username }), // Assuming `username` as the first name
         });
+        
 
         if (error) {
             console.error("Email sending error:", error);
