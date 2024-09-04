@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+
 
 // Define the types for the props
 interface ConfirmationDialogProps {
@@ -27,7 +27,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   onClose,
   onContinue,
   confrimationText="Continue",
-  triggerText = "Show Dialog",
+ // triggerText = "Show Dialog",
   title = "Are you absolutely sure?",
   description = "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
 }) => {

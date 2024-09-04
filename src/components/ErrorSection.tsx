@@ -1,5 +1,5 @@
 import Link from "next/link"
-
+import React from "react";
 
 interface ErrorSectionProps {
     message: string;
@@ -54,6 +54,7 @@ interface ErrorSectionProps {
   }
   
   
+  // eslint-disable-next-line no-unused-vars
   function XIcon(props:any) {
     return (
       <svg

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-
+import React from "react"
 export default function AlbumsLoading() {
   return (
     <div className="flex flex-col gap-8">

@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import Style from "../app/styles/HomeStatsCard.module.css";
-
+import React from "react";
 import UserContext from "@/context/userContext";
 import { apiGet } from "@/helpers/axiosRequest";
 
@@ -10,6 +10,7 @@ import { apiGet } from "@/helpers/axiosRequest";
 const HomeStatsCard = () => {
   const context = useContext(UserContext);
   const labelId = context?.user?._id;
+  // eslint-disable-next-line no-unused-vars
   const [stats, setStats] = useState<{ albums: number, tracks: number, labels: number }>({
     albums: 0,
     tracks: 0,
@@ -38,6 +39,7 @@ const HomeStatsCard = () => {
     if (labelId) {
       fetchNumberCounts();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [labelId]);
 
   return (
